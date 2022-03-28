@@ -78,3 +78,4 @@ Senior System Architect                      mob: +46 70 519 81 95
 Strategic Product & System Management    ATM Multiservice Networks
 Data Backbone & Optical Services Division      Ericsson Telecom AB
 ```
+[Original Link](http://erlang.org/pipermail/erlang-questions/2001-April/003132.html)
