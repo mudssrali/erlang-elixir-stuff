@@ -11,14 +11,14 @@ On Sun, 22 Apr 2001, James Vernon wrote:
 >context switches very fast and efficient?
 ```
 
-Erlang processes are currently scheduled on a reduction count basis.
+Erlang processes are currently scheduled on a *reduction count basis*.
 One reduction is roughly equivalent to a function call.
 A process is allowed to run until it pauses to wait for input (a
 message from some other process) or until it has executed 1000
 reductions.
 
 There are functions to slightly optimize the scheduling of a process
-(yield(), bump_reductions(N)), but they are only meant for very
+(`yield()`, `bump_reductions(N)`), but they are only meant for very
 restricted use, and may be removed if the scheduler changes.
 
 A process waiting for a message will be re-scheduled as soon as there
@@ -26,8 +26,12 @@ is something new in the message queue, or as soon as the receive timer
 (receive ... after Time -> ... end) expires. It will then be put last
 in the appropriate queue.
 
-Erlang has 4 scheduler queues (priorities): 
-`max`, `high`, `normal`, and `low`.
+Erlang has 4 scheduler queues (priorities):
+ 
+- `max`
+- `high`
+- `normal`
+- `low`
 
 
 'max' and 'high' are strict. This means that the scheduler will
@@ -37,7 +41,7 @@ queue is empty; then it will do the same for the 'high' queue.
 'normal' and 'low' are fair priorities. Assuming no processes at
 levels 'max' and 'high', the scheduler will run 'normal' processes
 until the queue is empty, or until it has executed a total of 8000
-reductions (8*Max_Process_Reds); then it will execute one 'low'
+reductions (`8*Max_Process_Reds`); then it will execute one 'low'
 priority process, if there is one ready to run.
 
 The relationship between 'normal' and 'low' introduces a risk of
